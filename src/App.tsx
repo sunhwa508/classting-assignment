@@ -1,15 +1,16 @@
 import React from 'react';
 import './App.css';
-import { DashBoard, Home, AppLayout } from './components';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { DashBoard, Home, AppLayout, ResultBoard } from './components';
+import { Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
     <AppLayout>
-      <Router>
+      <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/quiz" component={DashBoard} />
-      </Router>
+        <Route path="/result" component={ResultBoard} />
+      </Switch>
     </AppLayout>
   );
 }

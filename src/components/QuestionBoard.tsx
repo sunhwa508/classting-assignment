@@ -1,16 +1,22 @@
 import { Typography } from 'antd';
+import { ConvertQuestion } from '../shared/rule';
 
 interface Props {
   currentStage: number;
   question: string;
   category: string;
 }
-const QuestionBoard = ({ currentStage, question, category }: Props) => {
+const QuestionBoard = ({ question, category }: Props) => {
   const { Title } = Typography;
   return (
-    <Title style={{ maxWidth: '500px' }} level={3}>
-      {question}
-    </Title>
+    <>
+      <Title style={{ textAlign: 'center' }} level={5}>
+        {category}
+      </Title>
+      <Title style={{ textAlign: 'center' }} level={3}>
+        {ConvertQuestion(question)}
+      </Title>
+    </>
   );
 };
 
