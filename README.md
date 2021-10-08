@@ -1,46 +1,59 @@
-# Getting Started with Create React App
+# classting Assignment - [클라팅]
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 📽 미리보기
 
-## Available Scripts
+# 🗓 개발 기간
 
-In the project directory, you can run:
+2021/10/7 ~ 2021/10/13
 
-### `yarn start`
+# 📚 구현 사항
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+`컴포넌트` - DashBoard, AnswerBoard, QuestionBoard, ResultBoard
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`shared` - types, rule 공통 함수, 타입
 
-### `yarn test`
+`config` - globalEnv
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+# 🔨 기술스택 및 사용 라이브러리
 
-### `yarn build`
+> React, Typescript, antd, cypress, chartjs,
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+1. `"react": "^17.0.2"` <br/>
+   리액트 cli 초기파일 구성
+2. `"react-chartjs-2"` <br/>
+   차트 라이브러리
+3. `"antd": "^4.16.13"` <br/>
+   디자인 컴포넌트
+4. `"cypress": "^8.5.0"` <br/>
+   e2e 테스트
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+# 📱 설치 및 시작하는 법
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+이 프로젝트는 Create React App으로 생성되었습니다.
 
-### `yarn eject`
+> This project was bootstrapped with Create React App.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+#### `yarn`
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+프로젝트에 필요한 npm packages, node_modules 다운로드
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+#### `yarn start`
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+개발모드로 웹 환경을 시작하는 명령어로
+접속주소는 http://localhost:3000 입니다.
 
-## Learn More
+#### `yarn build`
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+빌드하는 명령어로 현재 설정되어있는 환경 변수에 따라 빌드 됩니다.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 💄 코드 스타일 가이드
+
+1. `prettier` 플러그인을 사용하여 스타일을 관리합니다.
+
+## 🌐 배포
+
+> Netlify 무료배포 사이트를 이용해 배포하였습니다.
+
+### [배포링크]()
+
+## Reference
