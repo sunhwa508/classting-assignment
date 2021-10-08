@@ -10,4 +10,4 @@ export interface QuizTypes {
   response_code: number;
   results: Array<QuizDataTypes>;
 }
-export const ColorPalette = ['#fec5bb', '#fae1dd', '#e8e8e4', '#ece4db'];
+export const ColorPalette = ['#f0f5ff', '#f9f0ff', '#fff0f6', '#f6ffed'];

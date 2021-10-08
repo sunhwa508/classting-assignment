@@ -36,7 +36,7 @@ const ResultBoard = () => {
   }, [isLoading]);
 
   const handleRestart = () => {
-    history.push('/');
+    history.push('/quiz');
   };
   return (
     <>

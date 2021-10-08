@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Card, Row, Col, Button } from 'antd';
 import { ColorPalette } from '../shared/types';
-import '../App.css';
 import { ConvertQuestion } from '../shared/rule';
+import '../App.css';
 
 interface Props {
   currentStage: number;
@@ -13,22 +13,24 @@ interface Props {
 }
 
 const AnswerBoard = ({ handleAnswer, currentStage, correct, incorrect, type }: Props) => {
-  const [isActive, setIsActive] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState('');
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     handleAnswer(e);
     const eventTarget = e.target as HTMLElement;
-    console.log(eventTarget.innerText, e.currentTarget.innerText);
-    if (eventTarget.innerText === e.currentTarget.innerText) {
-    }
+    setSelectedAnswer(eventTarget.innerText);
   };
 
   return (
     <Card style={{ backgroundColor: 'transparent', border: 'none', height: 400 }}>
       {incorrect.concat(correct).map((item, index) => (
         <Card
+          key={item + index}
+          className={selectedAnswer === item ? 'highlight' : ''}
           id={index.toString()}
-          style={{ backgroundColor: ColorPalette[index] }}
-          hoverable
+          style={{
+            backgroundColor: ColorPalette[index],
+            fontSize: '1rem',
+          }}
           onClick={(e) => handleClick(e)}
         >
           {ConvertQuestion(item)}

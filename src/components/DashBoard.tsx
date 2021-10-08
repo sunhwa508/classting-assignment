@@ -4,7 +4,7 @@ import axios from 'axios';
 import { AnswerBoard } from './AnswerBoard';
 import { QuestionBoard } from './QuestionBoard';
 import { QuizTypes } from '../shared/types';
-import { Button, Typography, Skeleton } from 'antd';
+import { Button, Typography, Skeleton, Col, Card } from 'antd';
 import { LoadingOutlined } from '@ant-design/icons';
 import { globalEnv } from '../config/env';
 
@@ -73,25 +73,32 @@ const DashBoard = () => {
         <Skeleton loading={isLoading} avatar active></Skeleton>
       ) : (
         <>
-          <QuestionBoard
-            currentStage={currentStage}
-            question={data?.results[currentStage].question || ''}
-            category={data?.results[currentStage].category || ''}
-          />
-          <AnswerBoard
-            currentStage={currentStage}
-            correct={data?.results[currentStage].correct_answer || ''}
-            incorrect={data?.results[currentStage].incorrect_answers || []}
-            type={data?.results[currentStage].type}
-            handleAnswer={handleAnswer}
-          />
-          <Button size={'large'} shape="round" onClick={handleSkip}>
-            건너뛰기
-          </Button>
-          <Button disabled={!isSelected} size={'large'} shape="round" onClick={handleScore}>
-            다음문제
-          </Button>
-          <Title style={{ textAlign: 'center' }}>
+          <Card style={{ backgroundColor: '#fff', marginBottom: 20, borderRadius: 20 }}>
+            <QuestionBoard
+              currentStage={currentStage}
+              question={data?.results[currentStage].question || ''}
+              category={data?.results[currentStage].category || ''}
+            />
+            <AnswerBoard
+              currentStage={currentStage}
+              correct={data?.results[currentStage].correct_answer || ''}
+              incorrect={data?.results[currentStage].incorrect_answers || []}
+              type={data?.results[currentStage].type}
+              handleAnswer={handleAnswer}
+            />
+          </Card>
+          <Col>
+            <Button size={'large'} shape="round" onClick={handleSkip}>
+              건너뛰기
+            </Button>
+            <Button disabled={!isSelected} size={'large'} shape="round" onClick={handleScore}>
+              다음문제
+            </Button>
+          </Col>
+          <Title
+            level={3}
+            style={{ textAlign: 'center', position: 'absolute', bottom: 0, width: '100%' }}
+          >
             Current Score {score} / {data?.results.length}
           </Title>
         </>

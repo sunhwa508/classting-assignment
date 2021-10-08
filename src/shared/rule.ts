@@ -7,5 +7,6 @@ export const ConvertQuestion = (str: string): string => {
   str = str.replace(/&gt;/g, '>');
   str = str.replace(/&quot;/g, '"');
   str = str.replace(/&#039;/g, "'");
+  str = str.replace(/&eacute;/g, 'é');
   return str;
 };
