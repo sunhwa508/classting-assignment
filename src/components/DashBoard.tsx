@@ -5,7 +5,6 @@ import { AnswerBoard } from './AnswerBoard';
 import { QuestionBoard } from './QuestionBoard';
 import { QuizTypes } from '../shared/types';
 import { Button, Typography, Skeleton, Col, Card } from 'antd';
-import { LoadingOutlined } from '@ant-design/icons';
 import { globalEnv } from '../config/env';
 
 const DashBoard = () => {

@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Card, Row, Col, Button } from 'antd';
+import { Card } from 'antd';
 import { ColorPalette } from '../shared/types';
 import { ConvertQuestion } from '../shared/rule';
 import '../App.css';

@@ -1,4 +1,4 @@
-import { PageHeader, Typography } from 'antd';
+import { PageHeader } from 'antd';
 
 const Header = () => {
   return (
