@@ -5,6 +5,7 @@ import { AnswerBoard } from './AnswerBoard';
 import { QuestionBoard } from './QuestionBoard';
 import { QuizTypes } from '../shared/types';
 import { Button, Typography, Skeleton } from 'antd';
+import { LoadingOutlined } from '@ant-design/icons';
 import { globalEnv } from '../config/env';
 
 const DashBoard = () => {
@@ -65,14 +66,13 @@ const DashBoard = () => {
       return;
     }
   };
+
   return (
     <>
-      <Skeleton loading={isLoading} avatar active></Skeleton>
-      {!isLoading && (
+      {isLoading ? (
+        <Skeleton loading={isLoading} avatar active></Skeleton>
+      ) : (
         <>
-          <Title style={{ textAlign: 'center' }} level={3}>
-            {score} / {data?.results.length}
-          </Title>
           <QuestionBoard
             currentStage={currentStage}
             question={data?.results[currentStage].question || ''}
@@ -91,6 +91,9 @@ const DashBoard = () => {
           <Button disabled={!isSelected} size={'large'} shape="round" onClick={handleScore}>
             다음문제
           </Button>
+          <Title style={{ textAlign: 'center' }}>
+            Current Score {score} / {data?.results.length}
+          </Title>
         </>
       )}
     </>

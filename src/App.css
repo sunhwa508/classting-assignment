@@ -1,1 +1,6 @@
 @import '~antd/dist/antd.css';
+
+.highlight {
+  background: #000;
+  border: 2px solid black;
+}

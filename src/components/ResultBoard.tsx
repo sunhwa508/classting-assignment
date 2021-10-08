@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { Skeleton, Result, Typography } from 'antd';
-import { useLocation } from 'react-router-dom';
+import { Skeleton, Button } from 'antd';
+import { useLocation, useHistory } from 'react-router-dom';
 import { QuizTypes } from '../shared/types';
-
+import { Doughnut } from 'react-chartjs-2';
 interface LocationState {
   from: {
     pathname: string;
@@ -14,8 +14,20 @@ interface LocationState {
 const ResultBoard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const location = useLocation<LocationState>();
-  const { Title } = Typography;
   const { data, score } = location.state;
+  let history = useHistory();
+
+  const chartData = {
+    labels: ['정답', '오답'],
+    datasets: [
+      {
+        label: '정답률',
+        data: [score, data.results.length - score],
+        backgroundColor: ['rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+        borderWidth: 0,
+      },
+    ],
+  };
 
   useEffect(() => {
     setInterval(() => {
@@ -23,22 +35,21 @@ const ResultBoard = () => {
     }, 1000);
   }, [isLoading]);
 
+  const handleRestart = () => {
+    history.push('/');
+  };
   return (
     <>
-      <Skeleton loading={isLoading} avatar active></Skeleton>
-      <Result
-        status="success"
-        title="과연 점수는?!"
-        subTitle="정답수와 오답수를 공개합니다! "
-        extra={[
-          <Title style={{ textAlign: 'center' }} level={2}>
-            {score}
-          </Title>,
-          <Title style={{ textAlign: 'center' }} level={2}>
-            {data.results.length - score}
-          </Title>,
-        ]}
-      />
+      {isLoading ? (
+        <Skeleton loading={isLoading} avatar active></Skeleton>
+      ) : (
+        <>
+          <Doughnut data={chartData} />
+          <Button onClick={handleRestart} style={{ borderRadius: 10, fontSize: '1rem' }}>
+            다시풀기
+          </Button>
+        </>
+      )}
     </>
   );
 };

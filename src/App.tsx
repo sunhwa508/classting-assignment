@@ -5,13 +5,13 @@ import { Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <AppLayout>
-      <Switch>
-        <Route exact path="/" component={Home} />
+    <Switch>
+      <Route exact path="/" component={Home} />
+      <AppLayout>
         <Route path="/quiz" component={DashBoard} />
         <Route path="/result" component={ResultBoard} />
-      </Switch>
-    </AppLayout>
+      </AppLayout>
+    </Switch>
   );
 }
 

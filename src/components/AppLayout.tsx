@@ -16,7 +16,15 @@ const AppLayout = ({ children }: Props) => {
       }}
     >
       <Header />
-      <Content style={{ width: '60%' }}>{children}</Content>
+      <Content
+        style={{
+          width: '50vw',
+          backgroundColor: '#fff',
+          borderRadius: 10,
+        }}
+      >
+        {children}
+      </Content>
       <Footer>Footer</Footer>
     </Layout>
   );

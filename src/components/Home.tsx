@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button } from 'antd';
+import { Header } from './Header';
+import { Button, Layout } from 'antd';
 
 const Home = () => {
   let history = useHistory();
@@ -24,14 +25,21 @@ const Home = () => {
   }, [counter, isWait, history]);
 
   return (
-    <Button
-      disabled={isWait}
-      shape="circle"
-      onClick={handleClick}
-      style={{ width: '300px', height: '300px', fontSize: '2rem' }}
+    <Layout
+      style={{
+        height: '100vh',
+        alignItems: 'center',
+      }}
     >
-      {!isWait ? 'START' : counter}
-    </Button>
+      <Header />
+      <Button
+        disabled={isWait}
+        onClick={handleClick}
+        style={{ width: '300px', height: '100px', borderRadius: 10, fontSize: '2rem' }}
+      >
+        {!isWait ? 'START' : counter}
+      </Button>
+    </Layout>
   );
 };
 
