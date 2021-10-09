@@ -5,10 +5,11 @@ import { AnswerBoard } from './AnswerBoard';
 import { QuestionBoard } from './QuestionBoard';
 import { QuizTypes, QuizDataTypes } from '../shared/types';
 import { storagePropsManager } from '../shared/storageManager';
-import { Button, Typography, Skeleton, Col, Card } from 'antd';
+import { Button, Typography, Skeleton, Row, Col, Card } from 'antd';
 import { globalEnv } from '../config/env';
 import { Timer } from './Timer';
 import { STORAGE_KEY_NAMES } from '../shared/constants';
+
 const DashBoard = () => {
   const [currentStage, setCurrentStage] = useState(0);
   const [answer, setAnswer] = useState('');
@@ -23,6 +24,15 @@ const DashBoard = () => {
   const { Title } = Typography;
   let history = useHistory();
 
+  const saveMyAnswer = (answer?: string) => {
+    const yourAnswer = { your_answer: answer || 'SKIP' };
+    const withMyAnswer = Object.assign(data?.results[currentStage]!, yourAnswer);
+    setWrongAnswer([...wrongAnswers, data?.results[currentStage]!]);
+    storagePropsManager.setItemProps(STORAGE_KEY_NAMES.WRONG_ANSWERS, [
+      ...wrongAnswers,
+      withMyAnswer,
+    ]);
+  };
   useEffect(() => {
     axios({
       method: 'get',
@@ -52,25 +62,16 @@ const DashBoard = () => {
       });
     }
     if (answer === data?.results[currentStage].correct_answer) {
-      console.log(answer, data?.results[currentStage].correct_answer);
       setScore((prev) => prev + 1);
     } else {
-      setWrongAnswer([...wrongAnswers, data?.results[currentStage]!]);
-      storagePropsManager.setItemProps(STORAGE_KEY_NAMES.WRONG_ANSWERS, [
-        ...wrongAnswers,
-        data?.results[currentStage]!,
-      ]);
+      saveMyAnswer(answer);
     }
     setCurrentStage((prev) => prev + 1);
     setIsSelected(false);
   };
 
   const handleSkip = () => {
-    setWrongAnswer([...wrongAnswers, data?.results[currentStage]!]);
-    storagePropsManager.setItemProps(STORAGE_KEY_NAMES.WRONG_ANSWERS, [
-      ...wrongAnswers,
-      data?.results[currentStage]!,
-    ]);
+    saveMyAnswer();
     setCurrentStage((prev) => prev + 1);
     setIsSelected(false);
     if (currentStage === 9) {
@@ -87,6 +88,7 @@ const DashBoard = () => {
         <Skeleton loading={isLoading} avatar active></Skeleton>
       ) : (
         <>
+          <Title level={5}>Current Score {score}</Title>
           <Card style={{ backgroundColor: '#fff', marginBottom: 20, borderRadius: 20 }}>
             <QuestionBoard
               currentStage={currentStage}
@@ -101,6 +103,9 @@ const DashBoard = () => {
               type={data?.results[currentStage].type}
               handleAnswer={handleAnswer}
             />
+            <Row justify="center" align="middle">
+              <Col>{currentStage !== 10 && <Timer />}</Col>
+            </Row>
           </Card>
           <Col>
             <Button size={'large'} shape="round" onClick={handleSkip}>
@@ -110,13 +115,6 @@ const DashBoard = () => {
               다음문제
             </Button>
           </Col>
-          <Title
-            level={3}
-            style={{ textAlign: 'center', position: 'absolute', bottom: 0, width: '100%' }}
-          >
-            Current Score {score} / {data?.results.length}
-          </Title>
-          {currentStage !== 10 && <Timer />}
         </>
       )}
     </>

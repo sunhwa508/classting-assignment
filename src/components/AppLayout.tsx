@@ -18,14 +18,14 @@ const AppLayout = ({ children }: Props) => {
       <Header />
       <Content
         style={{
-          width: '50vw',
+          width: '60vw',
           borderRadius: 10,
           position: 'relative',
         }}
       >
         {children}
       </Content>
-      <Footer>Footer</Footer>
+      {/* <Footer>Footer</Footer> */}
     </Layout>
   );
 };

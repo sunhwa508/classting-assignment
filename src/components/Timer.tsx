@@ -1,28 +1,29 @@
 import { useState, useEffect, useRef } from 'react';
-import { Row, Col } from 'antd';
+import { Row, Col, Typography } from 'antd';
 import { STORAGE_KEY_NAMES } from '../shared/constants';
 import { storagePropsManager } from '../shared/storageManager';
 const Timer = () => {
   const [timeElapsed, setTimeElapsed] = useState(0);
+  const { Title } = Typography;
 
   const record: React.MutableRefObject<any> = useRef();
   record.current = timeElapsed;
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeElapsed((timeElapsed) => timeElapsed + 30);
-    }, 30);
+      setTimeElapsed((timeElapsed) => timeElapsed + 1000);
+    }, 1000);
     return () => {
       storagePropsManager.setItemProps(STORAGE_KEY_NAMES.RECORD, record.current / 1000);
       clearInterval(timer);
     };
   }, []);
-
   return (
     <>
       <Row>
-        <Col>{Math.floor(timeElapsed / 1000)}초</Col>
-        <Col>{(timeElapsed % 1000) / 10}</Col>
+        <Col>
+          <Title level={5}>시작한지 {Math.floor(timeElapsed / 1000)} 초가 지났습니다.</Title>
+        </Col>
       </Row>
     </>
   );
