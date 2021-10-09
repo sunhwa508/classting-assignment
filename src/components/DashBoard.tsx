@@ -3,10 +3,12 @@ import { useHistory } from 'react-router-dom';
 import axios from 'axios';
 import { AnswerBoard } from './AnswerBoard';
 import { QuestionBoard } from './QuestionBoard';
-import { QuizTypes } from '../shared/types';
+import { QuizTypes, QuizDataTypes } from '../shared/types';
+import { storagePropsManager } from '../shared/storageManager';
 import { Button, Typography, Skeleton, Col, Card } from 'antd';
 import { globalEnv } from '../config/env';
-
+import { Timer } from './Timer';
+import { STORAGE_KEY_NAMES } from '../shared/constants';
 const DashBoard = () => {
   const [currentStage, setCurrentStage] = useState(0);
   const [answer, setAnswer] = useState('');
@@ -14,6 +16,10 @@ const DashBoard = () => {
   const [data, setData] = useState<QuizTypes>();
   const [isSelected, setIsSelected] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
+  const [wrongAnswers, setWrongAnswer] = useState<QuizDataTypes[]>(
+    storagePropsManager.getItemProps(STORAGE_KEY_NAMES.WRONG_ANSWERS) || []
+  );
+
   const { Title } = Typography;
   let history = useHistory();
 
@@ -44,17 +50,27 @@ const DashBoard = () => {
         pathname: '/result',
         state: { data, score },
       });
-      return;
     }
     if (answer === data?.results[currentStage].correct_answer) {
       console.log(answer, data?.results[currentStage].correct_answer);
       setScore((prev) => prev + 1);
+    } else {
+      setWrongAnswer([...wrongAnswers, data?.results[currentStage]!]);
+      storagePropsManager.setItemProps(STORAGE_KEY_NAMES.WRONG_ANSWERS, [
+        ...wrongAnswers,
+        data?.results[currentStage]!,
+      ]);
     }
     setCurrentStage((prev) => prev + 1);
     setIsSelected(false);
   };
 
   const handleSkip = () => {
+    setWrongAnswer([...wrongAnswers, data?.results[currentStage]!]);
+    storagePropsManager.setItemProps(STORAGE_KEY_NAMES.WRONG_ANSWERS, [
+      ...wrongAnswers,
+      data?.results[currentStage]!,
+    ]);
     setCurrentStage((prev) => prev + 1);
     setIsSelected(false);
     if (currentStage === 9) {
@@ -62,7 +78,6 @@ const DashBoard = () => {
         pathname: '/result',
         state: { data, score },
       });
-      return;
     }
   };
 
@@ -77,6 +92,7 @@ const DashBoard = () => {
               currentStage={currentStage}
               question={data?.results[currentStage].question || ''}
               category={data?.results[currentStage].category || ''}
+              difficulty={data?.results[currentStage].difficulty || ''}
             />
             <AnswerBoard
               currentStage={currentStage}
@@ -100,6 +116,7 @@ const DashBoard = () => {
           >
             Current Score {score} / {data?.results.length}
           </Title>
+          {currentStage !== 10 && <Timer />}
         </>
       )}
     </>

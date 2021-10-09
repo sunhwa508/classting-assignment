@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
-import { Skeleton, Button } from 'antd';
+import { Button, Col, Row } from 'antd';
 import { useLocation, useHistory } from 'react-router-dom';
+import { STORAGE_KEY_NAMES } from '../shared/constants';
+import { storagePropsManager } from '../shared/storageManager';
 import { QuizTypes } from '../shared/types';
 import { Doughnut } from 'react-chartjs-2';
+
 interface LocationState {
   from: {
     pathname: string;
@@ -12,44 +14,56 @@ interface LocationState {
 }
 
 const ResultBoard = () => {
-  const [isLoading, setIsLoading] = useState(true);
   const location = useLocation<LocationState>();
   const { data, score } = location.state;
   let history = useHistory();
-
   const chartData = {
     labels: ['정답', '오답'],
     datasets: [
       {
         label: '정답률',
         data: [score, data.results.length - score],
-        backgroundColor: ['rgba(255, 206, 86, 1)', 'rgba(75, 192, 192, 1)'],
+        backgroundColor: ['#6ce07a', '#ec6441'],
         borderWidth: 0,
       },
     ],
   };
 
-  useEffect(() => {
-    setInterval(() => {
-      setIsLoading(false);
-    }, 1000);
-  }, [isLoading]);
-
-  const handleRestart = () => {
-    history.push('/quiz');
+  const handleHistory = (to: string) => {
+    history.push(`/${to}`);
   };
   return (
     <>
-      {isLoading ? (
-        <Skeleton loading={isLoading} avatar active></Skeleton>
-      ) : (
-        <>
-          <Doughnut data={chartData} />
-          <Button onClick={handleRestart} style={{ borderRadius: 10, fontSize: '1rem' }}>
+      <Row justify="center" align="middle">
+        <Col span={18}>
+          <Doughnut
+            data={chartData}
+            style={{ height: '400px' }}
+            options={{
+              responsive: true,
+              maintainAspectRatio: false,
+            }}
+          />
+        </Col>
+        <Col span={6}>
+          <Button
+            onClick={() => handleHistory('wrongAnswer')}
+            style={{ borderRadius: 10, fontSize: '1rem' }}
+          >
+            오답노트
+          </Button>
+          <br />
+          <Button
+            onClick={() => handleHistory('quiz')}
+            style={{ borderRadius: 10, fontSize: '1rem' }}
+          >
             다시풀기
           </Button>
-        </>
-      )}
+        </Col>
+      </Row>
+      <Row justify="center" align="middle">
+        <Col>걸린시간{storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RECORD)}</Col>
+      </Row>
     </>
   );
 };

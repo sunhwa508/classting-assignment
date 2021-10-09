@@ -12,7 +12,7 @@ interface Props {
   handleAnswer: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
-const AnswerBoard = ({ handleAnswer, currentStage, correct, incorrect, type }: Props) => {
+const AnswerBoard = ({ handleAnswer, correct, incorrect }: Props) => {
   const [selectedAnswer, setSelectedAnswer] = useState('');
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     handleAnswer(e);
