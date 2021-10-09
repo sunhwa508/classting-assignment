@@ -11,5 +11,21 @@ describe('App E2E', () => {
       method: 'GET',
       url: 'https://opentdb.com/api.php?amount=10',
     }).as('apiCheck');
+
+    cy.get('.ant-card-body').click({ multiple: true, force: true });
+
+    cy.get('.ant-card-body').click({ multiple: true, force: true });
+    cy.get('.ant-btn').should('have.text', '건너뛰기다음문제');
+
+    cy.contains('다음문제').click();
+    cy.contains('건너뛰기').click();
+    cy.contains('건너뛰기').click();
+    cy.contains('건너뛰기').click();
+    cy.contains('건너뛰기').click();
+    cy.contains('건너뛰기').click();
+    cy.contains('건너뛰기').click();
+    cy.contains('건너뛰기').click();
+    cy.contains('건너뛰기').click();
+    cy.contains('건너뛰기').click();
   });
 });

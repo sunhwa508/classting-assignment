@@ -19,7 +19,6 @@ const AppLayout = ({ children }: Props) => {
       <Content
         style={{
           width: '50vw',
-
           borderRadius: 10,
           position: 'relative',
         }}
