@@ -1,6 +1,6 @@
 describe('App E2E', () => {
   it('헤더가 있어야 한다', () => {
-    cy.visit('http://localhost:3000');
+    cy.visit('/');
 
     cy.get('.site-page-header').should('have.text', '퀴즈This is a quiz test');
     cy.get('.ant-btn').should('have.text', 'START');

@@ -3,6 +3,7 @@ export const STORAGE_KEY_NAMES = {
   RECORD: 'RECORD',
   SCORE: 'SCORE',
   NUMBER_OF_QUESTION: 'NUMBER_OF_QUESTION',
+  RESULT_DATA: 'RESULT_DATA',
 };
 
 type ObjType = {

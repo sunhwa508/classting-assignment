@@ -56,10 +56,8 @@ const DashBoard = () => {
 
   const handleScore = () => {
     if (currentStage === 9) {
-      history.push({
-        pathname: '/result',
-        state: { data, score },
-      });
+      history.push(`/result`);
+      storagePropsManager.setItemProps(STORAGE_KEY_NAMES.RESULT_DATA, { data, score });
     }
     if (answer === data?.results[currentStage].correct_answer) {
       setScore((prev) => prev + 1);
@@ -75,10 +73,8 @@ const DashBoard = () => {
     setCurrentStage((prev) => prev + 1);
     setIsSelected(false);
     if (currentStage === 9) {
-      history.push({
-        pathname: '/result',
-        state: { data, score },
-      });
+      history.push(`/result`);
+      storagePropsManager.setItemProps(STORAGE_KEY_NAMES.RESULT_DATA, { data, score });
     }
   };
 

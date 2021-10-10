@@ -1,28 +1,15 @@
 import { Button, Col, Row } from 'antd';
-import { useLocation, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { STORAGE_KEY_NAMES } from '../shared/constants';
 import { storagePropsManager } from '../shared/storageManager';
-import { QuizTypes } from '../shared/types';
 import { Doughnut } from 'react-chartjs-2';
 import { useEffect, useState } from 'react';
 
-interface LocationState {
-  from: {
-    pathname: string;
-  };
-  data: QuizTypes;
-  score: number;
-}
-
 const ResultBoard = () => {
-  const location = useLocation<LocationState>();
   const [record, setRecord] = useState();
-  const { data, score } = location.state;
 
   useEffect(() => {
     setRecord(storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RECORD));
-    storagePropsManager.setItemProps(STORAGE_KEY_NAMES.SCORE, score);
-    storagePropsManager.setItemProps(STORAGE_KEY_NAMES.NUMBER_OF_QUESTION, data);
   }, [record]);
 
   let history = useHistory();
@@ -33,9 +20,9 @@ const ResultBoard = () => {
       {
         label: '정답률',
         data: [
-          storagePropsManager.getItemProps(STORAGE_KEY_NAMES.SCORE),
-          storagePropsManager.getItemProps(STORAGE_KEY_NAMES.NUMBER_OF_QUESTION).results.length -
-            storagePropsManager.getItemProps(STORAGE_KEY_NAMES.SCORE),
+          storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RESULT_DATA).score,
+          storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RESULT_DATA).data.results.length -
+            storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RESULT_DATA).score,
         ],
         backgroundColor: ['#6ce07a', '#ec6441'],
         borderWidth: 0,
