@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Card } from 'antd';
 import { ColorPalette } from '../shared/types';
 import { ConvertQuestion } from '../shared/rule';
