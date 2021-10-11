@@ -37,15 +37,17 @@ const WrongAnswerBoard = () => {
   ];
 
   return (
-    <Row justify="end">
-      <Col>
+    <>
+      <Row style={{ justifyContent: 'right' }}>
         <HomeOutlined
           onClick={() => history.push('/result')}
-          style={{ fontSize: '20px', padding: 10 }}
+          style={{ fontSize: '20px', marginBottom: 10 }}
         />
-      </Col>
-      <Table columns={columns} dataSource={wrongAnswers} />
-    </Row>
+      </Row>
+      <Row>
+        <Table columns={columns} dataSource={wrongAnswers} />
+      </Row>
+    </>
   );
 };
 

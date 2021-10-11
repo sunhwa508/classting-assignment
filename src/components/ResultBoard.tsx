@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Col, Row, Alert } from 'antd';
+import { Button, Col, Row, Typography } from 'antd';
 import { FileDoneOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
 import { Doughnut } from 'react-chartjs-2';
@@ -8,6 +8,7 @@ import { storagePropsManager } from '../shared/storageManager';
 
 const ResultBoard = () => {
   const [record, setRecord] = useState();
+  const { Title } = Typography;
   useEffect(() => {
     setRecord(storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RECORD));
   }, [record]);
@@ -33,6 +34,7 @@ const ResultBoard = () => {
   const handlePush = (to: string) => {
     history.push(`/${to}`);
   };
+
   return (
     <>
       <Row
@@ -40,11 +42,10 @@ const ResultBoard = () => {
         align="middle"
         style={{ backgroundColor: '#ffffff', borderRadius: 20, padding: 20 }}
       >
-        <Alert
-          message={`YOUR RECORD IS ${record} SECOND`}
-          type="warning"
-          style={{ marginBottom: 10 }}
-        />
+        <Title>
+          YOUR RECORD "{record}" SECOND <br /> YOUR SCORE "
+          {storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RESULT_DATA).score}"
+        </Title>
         <Col span={18}>
           <Doughnut
             data={chartData}

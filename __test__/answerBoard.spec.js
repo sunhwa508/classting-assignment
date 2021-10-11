@@ -19,7 +19,15 @@ afterEach(() => {
 });
 
 test('should render component', () => {
+  const handleAnswer = jest.fn();
+
   act(() => {
-    render(<AnswerBoard correct={'1'} incorrect={[]} />, container);
+    render(<AnswerBoard handleAnswer={handleAnswer} correct={'1'} incorrect={[]} />, container);
   });
+
+  const button = document.querySelector('.ant-card-bordered');
+  act(() => {
+    button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+  });
+  expect(handleAnswer).toHaveBeenCalledTimes(0);
 });

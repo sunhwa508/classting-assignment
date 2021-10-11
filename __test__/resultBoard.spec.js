@@ -9,6 +9,16 @@ import { STORAGE_KEY_NAMES } from '../src/shared/constants';
  * @jest-environment jsdom
  */
 
+window.matchMedia =
+  window.matchMedia ||
+  function () {
+    return {
+      matches: false,
+      addListener: function () {},
+      removeListener: function () {},
+    };
+  };
+
 const fakeLocalStorage = (function () {
   let store = {};
 
@@ -47,33 +57,21 @@ describe('storage', () => {
     expect(items).toEqual(JSON.parse('{"data": {"response_code": 0, "results": []}, "score": 1}'));
   });
 
-  window.matchMedia =
-    window.matchMedia ||
-    function () {
-      return {
-        matches: false,
-        addListener: function () {},
-        removeListener: function () {},
-      };
-    };
-
   let container = null;
   beforeEach(() => {
-    // 렌더링 대상으로 DOM 엘리먼트를 설정합니다.
     container = document.createElement('div');
     document.body.appendChild(container);
   });
 
   afterEach(() => {
-    // 기존의 테스트 환경을 정리합니다.
     unmountComponentAtNode(container);
     container.remove();
     container = null;
   });
-});
 
-// test('should render component', () => {
-//   act(() => {
-//     render(<ResultBoard />, container);
-//   });
-// });
+  // it('should render component', () => {
+  //   act(() => {
+  //     render(<ResultBoard />, container);
+  //   });
+  // });
+});

@@ -18,8 +18,33 @@ afterEach(() => {
   container = null;
 });
 
-test('should render component', () => {
-  act(() => {
+test('should render component', async () => {
+  // const fakeData = {
+  //   response_code: 0,
+  //   results: [
+  //     {
+  //       category: 'General Knowledge',
+  //       type: 'multiple',
+  //       difficulty: 'medium',
+  //       question: 'What is the Swedish word for &quot;window&quot;?',
+  //       correct_answer: 'F&ouml;nster',
+  //       incorrect_answers: ['H&aring;l', 'Sk&auml;rm', 'Ruta'],
+  //     },
+  //   ],
+  // };
+
+  // jest.spyOn(global, 'fetch').mockImplementation(() =>
+  //   Promise.resolve({
+  //     json: () => Promise.resolve(fakeData),
+  //   })
+  // );
+
+  await act(async () => {
     render(<DashBoard />, container);
   });
+
+  // expect(container.querySelector('.ant-alert-message').textContent).toBe(fakeData.category);
+  // expect(container.querySelector('.ant-tag').textContent).toBe(fakeData.difficulty);
+
+  // global.fetch.mockRestore();
 });
