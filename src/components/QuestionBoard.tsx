@@ -1,5 +1,5 @@
 import React from 'react';
-import { Typography, Card, Alert, Tag, Row, Col } from 'antd';
+import { Typography, Alert, Tag, Row, Col } from 'antd';
 import { ConvertQuestion } from '../shared/rule';
 import { DIFFICULTY_LEVEL } from '../shared/constants';
 interface Props {

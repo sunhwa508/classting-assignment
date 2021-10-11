@@ -9,6 +9,7 @@ import { Button, Typography, Skeleton, Row, Col, Card } from 'antd';
 import { globalEnv } from '../config/env';
 import { Timer } from './Timer';
 import { STORAGE_KEY_NAMES } from '../shared/constants';
+import { SyncOutlined } from '@ant-design/icons';
 
 const DashBoard = () => {
   const [currentStage, setCurrentStage] = useState(0);

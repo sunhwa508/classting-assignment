@@ -1,6 +1,7 @@
 import React from 'react';
 import { Layout } from 'antd';
 import { Header } from './Header';
+
 interface Props {
   children: React.ReactNode;
 }
@@ -10,7 +11,7 @@ const AppLayout = ({ children }: Props) => {
   return (
     <Layout
       style={{
-        height: '100vh',
+        minHeight: '100vh',
         alignItems: 'center',
         justifyContent: 'center',
         textAlign: 'center',

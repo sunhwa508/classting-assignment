@@ -1,11 +1,10 @@
-import React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router';
+import { Table, Row, Col } from 'antd';
+import { HomeOutlined } from '@ant-design/icons';
 import { storagePropsManager } from '../shared/storageManager';
 import { STORAGE_KEY_NAMES } from '../shared/constants';
-import { Table, Row, Col } from 'antd';
 import { ConvertQuestion } from '../shared/rule';
-import { HomeOutlined } from '@ant-design/icons';
-import { useHistory } from 'react-router';
 
 const WrongAnswerBoard = () => {
   let history = useHistory();

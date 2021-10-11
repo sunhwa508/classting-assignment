@@ -1,13 +1,13 @@
-import { Button, Col, Row } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { Button, Col, Row, Alert } from 'antd';
+import { FileDoneOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
+import { Doughnut } from 'react-chartjs-2';
 import { STORAGE_KEY_NAMES } from '../shared/constants';
 import { storagePropsManager } from '../shared/storageManager';
-import { Doughnut } from 'react-chartjs-2';
-import { useEffect, useState } from 'react';
 
 const ResultBoard = () => {
   const [record, setRecord] = useState();
-
   useEffect(() => {
     setRecord(storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RECORD));
   }, [record]);
@@ -24,7 +24,7 @@ const ResultBoard = () => {
           storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RESULT_DATA).data.results.length -
             storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RESULT_DATA).score,
         ],
-        backgroundColor: ['#6ce07a', '#ec6441'],
+        backgroundColor: ['#87c28e', '#ff896c'],
         borderWidth: 0,
       },
     ],
@@ -35,7 +35,16 @@ const ResultBoard = () => {
   };
   return (
     <>
-      <Row justify="center" align="middle">
+      <Row
+        justify="center"
+        align="middle"
+        style={{ backgroundColor: '#ffffff', borderRadius: 20, padding: 20 }}
+      >
+        <Alert
+          message={`YOUR RECORD IS ${record} SECOND`}
+          type="warning"
+          style={{ marginBottom: 10 }}
+        />
         <Col span={18}>
           <Doughnut
             data={chartData}
@@ -47,21 +56,27 @@ const ResultBoard = () => {
           />
         </Col>
         <Col span={6}>
-          <Button
-            onClick={() => handlePush('wrongAnswer')}
-            style={{ borderRadius: 10, fontSize: '1rem' }}
-          >
-            오답노트
-          </Button>
-          <br />
-          <Button onClick={() => handlePush('quiz')} style={{ borderRadius: 10, fontSize: '1rem' }}>
-            다시풀기
-          </Button>
+          <Col>
+            <Button
+              size={'large'}
+              icon={<FileDoneOutlined />}
+              className={'wrong-note'}
+              onClick={() => handlePush('wrongAnswer')}
+            >
+              오답노트
+            </Button>
+          </Col>
         </Col>
       </Row>
-      <Row justify="center" align="middle">
-        <Col>걸린시간{record}</Col>
-      </Row>
+      <Col>
+        <Button
+          onClick={() => handlePush('quiz')}
+          size={'large'}
+          style={{ fontSize: '1rem', margin: 20 }}
+        >
+          RESTART
+        </Button>
+      </Col>
     </>
   );
 };

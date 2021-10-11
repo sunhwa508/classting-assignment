@@ -27,5 +27,10 @@ describe('App E2E', () => {
     cy.contains('건너뛰기').click();
     cy.contains('건너뛰기').click();
     cy.contains('건너뛰기').click();
+
+    cy.get('.wrong-note').should('have.text', '오답노트').click();
+    cy.get('.anticon-home').click();
+
+    cy.get('.ant-btn-lg').should('have.text', 'RESTART').click();
   });
 });

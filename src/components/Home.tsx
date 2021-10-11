@@ -1,13 +1,13 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Header } from './Header';
 import { Button, Layout } from 'antd';
+import { Header } from './Header';
 
 const Home = () => {
   let history = useHistory();
   const [isWait, setIsWait] = useState(false);
-  const [counter, setCounter] = useState(3);
+  const [counter, setCounter] = useState(2);
 
   const handleClick = () => {
     setIsWait(true);
@@ -21,7 +21,7 @@ const Home = () => {
     } else if (counter === 0) {
       history.push('/quiz');
       setIsWait(false);
-      setCounter(3);
+      setCounter(2);
     }
   }, [counter, isWait, history]);
 
