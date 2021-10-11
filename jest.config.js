@@ -1,6 +1,6 @@
 module.exports = async () => {
   return {
-    rootDir: '/Users/sunhwalee/Documents/classting/__test__/',
+    rootDir: '/Users/sunhwalee/Documents/classting/',
     testEnvironment: 'jsdom',
     verbose: true,
     resetMocks: false,
