@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState, useEffect } from 'react';
 import { storagePropsManager } from '../shared/storageManager';
 import { STORAGE_KEY_NAMES } from '../shared/constants';

@@ -1,3 +1,4 @@
+import React from 'react';
 import { Layout } from 'antd';
 import { Header } from './Header';
 interface Props {
@@ -5,7 +6,7 @@ interface Props {
 }
 
 const AppLayout = ({ children }: Props) => {
-  const { Footer, Content } = Layout;
+  const { Content } = Layout;
   return (
     <Layout
       style={{
@@ -25,7 +26,6 @@ const AppLayout = ({ children }: Props) => {
       >
         {children}
       </Content>
-      {/* <Footer>Footer</Footer> */}
     </Layout>
   );
 };

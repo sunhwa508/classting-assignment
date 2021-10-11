@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Row, Col, Typography } from 'antd';
 import { STORAGE_KEY_NAMES } from '../shared/constants';
 import { storagePropsManager } from '../shared/storageManager';
