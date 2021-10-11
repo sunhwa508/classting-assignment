@@ -24,7 +24,9 @@ test('should render component', () => {
   act(() => {
     render(<Header />, container);
   });
-  expect(container.querySelector('.ant-page-header-heading-title').textContent).toBe('퀴즈');
+  expect(container.querySelector('.ant-page-header-heading-title').textContent).toBe(
+    'classting 퀴즈'
+  );
   expect(container.querySelector('.ant-page-header-heading-sub-title').textContent).toBe(
     'This is a quiz test'
   );

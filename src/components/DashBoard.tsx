@@ -1,15 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import { Button, Typography, Skeleton, Row, Col, Card } from 'antd';
 import axios from 'axios';
 import { AnswerBoard } from './AnswerBoard';
 import { QuestionBoard } from './QuestionBoard';
 import { QuizTypes, QuizDataTypes } from '../shared/types';
 import { storagePropsManager } from '../shared/storageManager';
-import { Button, Typography, Skeleton, Row, Col, Card } from 'antd';
+import { STORAGE_KEY_NAMES } from '../shared/constants';
 import { globalEnv } from '../config/env';
 import { Timer } from './Timer';
-import { STORAGE_KEY_NAMES } from '../shared/constants';
-import { SyncOutlined } from '@ant-design/icons';
 
 const DashBoard = () => {
   const [currentStage, setCurrentStage] = useState(0);
