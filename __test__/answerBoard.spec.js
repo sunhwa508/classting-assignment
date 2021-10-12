@@ -20,14 +20,20 @@ afterEach(() => {
 
 test('should render component', () => {
   const handleAnswer = jest.fn();
+  const handleClick = jest.fn(() => handleAnswer());
 
   act(() => {
-    render(<AnswerBoard handleAnswer={handleAnswer} correct={'1'} incorrect={[]} />, container);
+    render(
+      <AnswerBoard handleAnswer={handleAnswer} correct={'1'} incorrect={['1', '2', '3', '4']} />,
+      container
+    );
   });
 
-  const button = document.querySelector('.ant-card-bordered');
+  const card = document.querySelector('.ant-card-body');
+
   act(() => {
-    button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
+    card.dispatchEvent(new MouseEvent('click', { bubbles: true }));
   });
-  expect(handleAnswer).toHaveBeenCalledTimes(0);
+
+  // expect(handleClick).toHaveBeenCalled();
 });

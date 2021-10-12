@@ -8,7 +8,7 @@
 
 # 📚 구현 사항
 
-`컴포넌트` - DashBoard, AnswerBoard, QuestionBoard, ResultBoard
+`컴포넌트` - DashBoard, AnswerBoard, QuestionBoard, ResultBoard, AppLauout, Header, Home, Timer, WrongAnswer(오답노트)
 
 `shared` - types, rule 공통 함수, 타입
 
@@ -16,7 +16,7 @@
 
 # 🔨 기술스택 및 사용 라이브러리
 
-> React, Typescript, antd, cypress, chartjs,
+> React, Typescript, antd, cypress, jest, chartjs
 
 1. `"react": "^17.0.2"` <br/>
    리액트 cli 초기파일 구성
@@ -50,10 +50,22 @@
 
 1. `prettier` 플러그인을 사용하여 스타일을 관리합니다.
 
+## 테스트 코드 가이드
+
+1. e2e 테스트
+
+- cypress를 사용하여 테스트 코드를 작성합니다.
+
+2. 컴포넌트 테스트(유닛)
+
+- jest, jsdom을 사용한 테스트 코드를 작성합니다.
+  ![image](https://user-images.githubusercontent.com/61695175/136807272-4360ec9f-6945-4374-9cf2-8f450ff293ca.png)
+  (진행중..)
+
 ## 🌐 배포
 
 > Netlify 무료배포 사이트를 이용해 배포하였습니다.
 
-### [배포링크](https://mystifying-goldberg-3eb356.netlify.app/)
+### [배포링크](https://mystifying-goldberg-3eb356.netlify.app)
 
 ## Reference
