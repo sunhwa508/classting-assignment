@@ -1,11 +1,10 @@
 import React from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
+import { unmountComponentAtNode } from 'react-dom';
 import { ResultBoard } from '../src/components/ResultBoard';
 import { storagePropsManager } from '../src/shared/storageManager';
 import { STORAGE_KEY_NAMES } from '../src/shared/constants';
 import Adapter from 'enzyme-adapter-react-16';
 import { shallow, configure } from 'enzyme';
-import { act } from '@testing-library/react';
 
 /**
  * @jest-environment jsdom
@@ -56,7 +55,6 @@ describe('storage TEST', () => {
       score: 1,
       data: { response_code: 0, results: [] },
     });
-
     storagePropsManager.setItemProps(STORAGE_KEY_NAMES.RECORD, 10);
   });
 

@@ -20,7 +20,6 @@ afterEach(() => {
 
 test('should render component', () => {
   const handleAnswer = jest.fn();
-  const handleClick = jest.fn(() => handleAnswer());
 
   act(() => {
     render(
@@ -34,6 +33,4 @@ test('should render component', () => {
   act(() => {
     card.dispatchEvent(new MouseEvent('click', { bubbles: true }));
   });
-
-  // expect(handleClick).toHaveBeenCalled();
 });

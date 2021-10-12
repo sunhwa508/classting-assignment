@@ -10,5 +10,6 @@ module.exports = async () => {
     moduleNameMapper: {
       '\\.(css|scss)$': 'identity-obj-proxy',
     },
+    coveragePathIgnorePatterns: ['src/shared/index.ts'],
   };
 };

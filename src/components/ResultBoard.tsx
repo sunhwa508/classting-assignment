@@ -43,9 +43,9 @@ const ResultBoard = () => {
         align="middle"
         style={{ backgroundColor: '#ffffff', borderRadius: 20, padding: 20 }}
       >
-        <Title>
-          YOUR RECORD "{record}" SECOND <br /> YOUR SCORE "
-          {storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RESULT_DATA).score}"
+        <Title level={2}>
+          자네가 {storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RESULT_DATA).score || 0} 문제
+          맞추는데 {record}초 걸린건 맞고?
         </Title>
         <Col span={18}>
           <Doughnut
@@ -76,7 +76,7 @@ const ResultBoard = () => {
           size={'large'}
           style={{ fontSize: '1rem', margin: 20 }}
         >
-          RESTART
+          퀴즈가 쉽게 풀어지나? 재도전!
         </Button>
       </Col>
     </>

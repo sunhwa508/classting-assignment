@@ -2,7 +2,6 @@ import React from 'react';
 import { render, unmountComponentAtNode } from 'react-dom';
 import { DashBoard } from '../src/components/DashBoard';
 import { act } from 'react-dom/test-utils';
-
 /**
  * @jest-environment jsdom
  */
@@ -18,8 +17,14 @@ afterEach(() => {
   container = null;
 });
 
+it('should render component', () => {
+  act(() => {
+    render(<DashBoard />, container);
+  });
+});
+
 //https://jaketrent.com/post/mock-fetch-jest-test
-it('should render component, data', async () => {
+it('should fetch data', async () => {
   const fakeData = {
     response_code: 0,
     results: [
@@ -42,10 +47,6 @@ it('should render component, data', async () => {
   const res = await fetch('anyUrl');
   const json = await res.json();
   expect(json).toBe(fakeData);
-
-  await act(async () => {
-    render(<DashBoard />, container);
-  });
 
   global.fetch.mockClear();
   delete global.fetch;

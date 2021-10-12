@@ -5,10 +5,10 @@ import axios from 'axios';
 
 import { AnswerBoard } from './AnswerBoard';
 import { QuestionBoard } from './QuestionBoard';
+import { Timer } from './Timer';
+import { globalEnv } from '../config/env';
 import { QuizTypes, QuizDataTypes } from '../shared/types';
 import { storagePropsManager, STORAGE_KEY_NAMES } from '../shared';
-import { globalEnv } from '../config/env';
-import { Timer } from './Timer';
 
 const DashBoard = () => {
   const [currentStage, setCurrentStage] = useState(0);
@@ -20,19 +20,8 @@ const DashBoard = () => {
   const [wrongAnswers, setWrongAnswer] = useState<QuizDataTypes[]>(
     storagePropsManager.getItemProps(STORAGE_KEY_NAMES.WRONG_ANSWERS) || []
   );
-
   const { Title } = Typography;
   let history = useHistory();
-
-  const saveMyAnswer = (answer?: string) => {
-    const yourAnswer = { your_answer: answer || 'SKIP' };
-    const withMyAnswer = Object.assign(data?.results[currentStage]!, yourAnswer);
-    setWrongAnswer([...wrongAnswers, data?.results[currentStage]!]);
-    storagePropsManager.setItemProps(STORAGE_KEY_NAMES.WRONG_ANSWERS, [
-      ...wrongAnswers,
-      withMyAnswer,
-    ]);
-  };
 
   useEffect(() => {
     axios({
@@ -54,6 +43,16 @@ const DashBoard = () => {
     setIsSelected(true);
   };
 
+  const saveMyAnswer = (answer?: string) => {
+    const yourAnswer = { your_answer: answer || 'SKIP' };
+    const withMyAnswer = Object.assign(data?.results[currentStage]!, yourAnswer);
+    setWrongAnswer([...wrongAnswers, data?.results[currentStage]!]);
+    storagePropsManager.setItemProps(STORAGE_KEY_NAMES.WRONG_ANSWERS, [
+      ...wrongAnswers,
+      withMyAnswer,
+    ]);
+  };
+
   const handleScore = (hasScore: boolean) => {
     if (currentStage === 9) {
       history.push(`/result`);
@@ -63,13 +62,15 @@ const DashBoard = () => {
     if (hasScore) {
       if (answer === data?.results[currentStage].correct_answer) {
         setScore((prev) => prev + 1);
+        info();
       } else {
         saveMyAnswer(answer);
+        info();
       }
     } else {
       saveMyAnswer();
     }
-    info();
+
     setCurrentStage((prev) => prev + 1);
     setIsSelected(false);
   };
@@ -112,7 +113,12 @@ const DashBoard = () => {
             </Row>
           </Card>
           <Col>
-            <Button size={'large'} shape="round" onClick={() => handleScore(false)}>
+            <Button
+              data-testid={'skip'}
+              size={'large'}
+              shape="round"
+              onClick={() => handleScore(false)}
+            >
               건너뛰기
             </Button>
             <Button

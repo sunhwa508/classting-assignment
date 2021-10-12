@@ -1,11 +1,10 @@
 describe('App E2E', () => {
-  it('헤더가 있어야 한다', () => {
+  it('classting quiz E2E test', () => {
     cy.visit('/');
 
-    cy.get('.site-page-header').should('have.text', '퀴즈This is a quiz test');
-    cy.get('.ant-btn').should('have.text', 'START');
+    cy.get('.ant-btn').should('have.text', '수락하기 🎮');
 
-    cy.contains('START').click();
+    cy.contains('수락하기 🎮').click();
     cy.server();
     cy.route({
       method: 'GET',
@@ -18,9 +17,16 @@ describe('App E2E', () => {
     cy.get('.ant-btn').should('have.text', '건너뛰기다음문제');
 
     cy.contains('다음문제').click();
+    cy.get('.ant-card-body').click({ multiple: true, force: true });
+    cy.contains('OK').click();
+    cy.contains('다음문제').click();
+    cy.get('.ant-card-body').click({ multiple: true, force: true });
+    cy.contains('OK').click();
+    cy.contains('다음문제').click();
+    cy.get('.ant-card-body').click({ multiple: true, force: true });
+    cy.contains('OK').click();
     cy.contains('건너뛰기').click();
-    cy.contains('건너뛰기').click();
-    cy.contains('건너뛰기').click();
+
     cy.contains('건너뛰기').click();
     cy.contains('건너뛰기').click();
     cy.contains('건너뛰기').click();
@@ -31,6 +37,8 @@ describe('App E2E', () => {
     cy.get('.wrong-note').should('have.text', '오답노트').click();
     cy.get('.anticon-home').click();
 
-    cy.get('.ant-btn-lg').should('have.text', 'RESTART').click();
+    cy.get('.ant-btn-lg').contains('퀴즈가 쉽게 풀어지나? 재도전!').click();
+
+    return false;
   });
 });

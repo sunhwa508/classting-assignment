@@ -15,6 +15,7 @@ const AnswerBoard = ({ handleAnswer, correct, incorrect }: Props) => {
   const [selectedAnswer, setSelectedAnswer] = useState('');
 
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    e.stopPropagation();
     handleAnswer(e);
     const eventTarget = e.target as HTMLElement;
     setSelectedAnswer(eventTarget.innerText);

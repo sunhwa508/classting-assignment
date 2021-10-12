@@ -28,7 +28,7 @@ window.matchMedia =
     };
   };
 
-it('renders with Result', () => {
+it('renders component with Result', () => {
   act(() => {
     render(<WrongAnswerBoard />, container);
     expect(container.querySelector('Table').textContent).toBe(

@@ -10,7 +10,6 @@ let container = null;
 beforeEach(() => {
   container = document.createElement('div');
   document.body.appendChild(container);
-
   jest.useFakeTimers();
 });
 
@@ -18,7 +17,6 @@ afterEach(() => {
   unmountComponentAtNode(container);
   container.remove();
   container = null;
-
   jest.useRealTimers();
 });
 
@@ -32,7 +30,7 @@ window.matchMedia =
     };
   };
 
-test('should render component, timer', () => {
+test('should render component, timer test', () => {
   const timer = jest.fn();
   act(() => {
     render(<Timer />, container);
