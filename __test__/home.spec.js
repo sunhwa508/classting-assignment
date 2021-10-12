@@ -11,6 +11,7 @@ beforeEach(() => {
   // 렌더링 대상으로 DOM 엘리먼트를 설정합니다.
   container = document.createElement('div');
   document.body.appendChild(container);
+  jest.useFakeTimers();
 });
 
 afterEach(() => {
@@ -18,9 +19,11 @@ afterEach(() => {
   unmountComponentAtNode(container);
   container.remove();
   container = null;
+  jest.useRealTimers();
 });
 
 test('should render component', () => {
+  const onSelect = jest.fn();
   act(() => {
     render(<Home />, container);
   });
@@ -29,4 +32,24 @@ test('should render component', () => {
     button.dispatchEvent(new MouseEvent('click', { bubbles: true }));
     expect(button.innerHTML).toBe('<span>START</span>');
   });
+
+  act(() => {
+    jest.advanceTimersByTime(1000);
+  });
+  expect(onSelect).not.toHaveBeenCalled();
+});
+
+// setInterval clean up test
+it('should cleanup timer', () => {
+  const timer = jest.fn();
+  act(() => {
+    render(<Home />, container);
+  });
+  act(() => {
+    render(null, container);
+  });
+  act(() => {
+    jest.advanceTimersByTime(1000);
+  });
+  expect(timer).not.toHaveBeenCalled();
 });

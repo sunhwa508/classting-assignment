@@ -38,7 +38,6 @@ const DashBoard = () => {
     axios({
       method: 'get',
       url: globalEnv.API_ENDPOINT,
-      responseType: 'stream',
     })
       .then((response) => {
         setData(response.data);
@@ -55,28 +54,22 @@ const DashBoard = () => {
     setIsSelected(true);
   };
 
-  const handleScore = () => {
+  const handleScore = (hasScore: boolean) => {
     if (currentStage === 9) {
       history.push(`/result`);
       storagePropsManager.setItemProps(STORAGE_KEY_NAMES.RESULT_DATA, { data, score });
     }
-    if (answer === data?.results[currentStage].correct_answer) {
-      setScore((prev) => prev + 1);
+    if (hasScore) {
+      if (answer === data?.results[currentStage].correct_answer) {
+        setScore((prev) => prev + 1);
+      } else {
+        saveMyAnswer(answer);
+      }
     } else {
-      saveMyAnswer(answer);
+      saveMyAnswer();
     }
     setCurrentStage((prev) => prev + 1);
     setIsSelected(false);
-  };
-
-  const handleSkip = () => {
-    saveMyAnswer();
-    setCurrentStage((prev) => prev + 1);
-    setIsSelected(false);
-    if (currentStage === 9) {
-      history.push(`/result`);
-      storagePropsManager.setItemProps(STORAGE_KEY_NAMES.RESULT_DATA, { data, score });
-    }
   };
 
   return (
@@ -105,10 +98,15 @@ const DashBoard = () => {
             </Row>
           </Card>
           <Col>
-            <Button size={'large'} shape="round" onClick={handleSkip}>
+            <Button size={'large'} shape="round" onClick={() => handleScore(false)}>
               건너뛰기
             </Button>
-            <Button disabled={!isSelected} size={'large'} shape="round" onClick={handleScore}>
+            <Button
+              disabled={!isSelected}
+              size={'large'}
+              shape="round"
+              onClick={() => handleScore(true)}
+            >
               다음문제
             </Button>
           </Col>

@@ -23,6 +23,7 @@ const Home = () => {
       setIsWait(false);
       setCounter(2);
     }
+    return () => clearInterval();
   }, [counter, isWait, history]);
 
   return (

@@ -10,6 +10,7 @@ import { storagePropsManager } from '../shared/storageManager';
 const ResultBoard = () => {
   const [record, setRecord] = useState();
   const { Title } = Typography;
+
   useEffect(() => {
     setRecord(storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RECORD));
   }, [record]);

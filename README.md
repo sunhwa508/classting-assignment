@@ -59,7 +59,8 @@
 2. 컴포넌트 테스트(유닛)
 
 - jest, jsdom을 사용한 테스트 코드를 작성합니다.
-  ![image](https://user-images.githubusercontent.com/61695175/136807272-4360ec9f-6945-4374-9cf2-8f450ff293ca.png)
+  ![image](https://user-images.githubusercontent.com/61695175/136919645-18ece8e2-c76b-4932-87be-0fab35b6ab88.png)
+
   (진행중..)
 
 ## 🌐 배포
@@ -69,3 +70,5 @@
 ### [배포링크](https://mystifying-goldberg-3eb356.netlify.app)
 
 ## Reference
+
+https://ko.reactjs.org/docs/testing.html

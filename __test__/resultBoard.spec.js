@@ -1,14 +1,11 @@
 import React from 'react';
-import { render, unmountComponentAtNode, createMemoryHistory } from 'react-dom';
+import { render, unmountComponentAtNode } from 'react-dom';
 import { ResultBoard } from '../src/components/ResultBoard';
-
-import { act } from 'react-dom/test-utils';
-
 import { storagePropsManager } from '../src/shared/storageManager';
 import { STORAGE_KEY_NAMES } from '../src/shared/constants';
 import Adapter from 'enzyme-adapter-react-16';
-
 import { shallow, configure } from 'enzyme';
+import { act } from '@testing-library/react';
 
 /**
  * @jest-environment jsdom
@@ -59,11 +56,16 @@ describe('storage TEST', () => {
       score: 1,
       data: { response_code: 0, results: [] },
     });
+
+    storagePropsManager.setItemProps(STORAGE_KEY_NAMES.RECORD, 10);
   });
 
   it('get the values to the storage', () => {
     const items = storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RESULT_DATA);
     expect(items).toEqual(JSON.parse('{"data": {"response_code": 0, "results": []}, "score": 1}'));
+
+    const record = storagePropsManager.getItemProps(STORAGE_KEY_NAMES.RECORD);
+    expect(record).toEqual(JSON.parse(10));
   });
 });
 
@@ -77,18 +79,18 @@ window.matchMedia =
     };
   };
 
+const mockHistoryPush = jest.fn();
+jest.mock('react-router-dom', () => ({
+  ...jest.requireActual('react-router-dom'),
+  useHistory: () => ({
+    push: mockHistoryPush,
+  }),
+}));
+
 test('should render component', () => {
   configure({ adapter: new Adapter() });
 
   const wrapper = shallow(<ResultBoard />);
-
-  const mockHistoryPush = jest.fn();
-  jest.mock('react-router-dom', () => ({
-    ...jest.requireActual('react-router-dom'),
-    useHistory: () => ({
-      push: mockHistoryPush,
-    }),
-  }));
 
   const card = wrapper.find('.wrong-note');
   expect(card.length).toBe(1);

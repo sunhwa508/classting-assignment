@@ -14,6 +14,7 @@ interface Props {
 
 const AnswerBoard = ({ handleAnswer, correct, incorrect }: Props) => {
   const [selectedAnswer, setSelectedAnswer] = useState('');
+
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
     handleAnswer(e);
     const eventTarget = e.target as HTMLElement;
