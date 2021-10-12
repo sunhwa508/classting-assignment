@@ -2,10 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Button, Col, Row, Typography } from 'antd';
 import { FileDoneOutlined } from '@ant-design/icons';
 import { useHistory } from 'react-router-dom';
-
 import { Doughnut } from 'react-chartjs-2';
-import { STORAGE_KEY_NAMES } from '../shared/constants';
-import { storagePropsManager } from '../shared/storageManager';
+
+import { STORAGE_KEY_NAMES, storagePropsManager } from '../shared';
 
 const ResultBoard = () => {
   const [record, setRecord] = useState();

@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router';
 import { Table, Row } from 'antd';
 import { HomeOutlined } from '@ant-design/icons';
-import { storagePropsManager } from '../shared/storageManager';
-import { STORAGE_KEY_NAMES } from '../shared/constants';
-import { ConvertQuestion } from '../shared/rule';
+
+import { storagePropsManager, STORAGE_KEY_NAMES, ConvertQuestion } from '../shared';
 
 const WrongAnswerBoard = () => {
   let history = useHistory();

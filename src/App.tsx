@@ -1,6 +1,6 @@
-import './App.css';
 import { DashBoard, Home, AppLayout, ResultBoard, WrongAnswerBoard } from './components';
 import { Switch, Route } from 'react-router-dom';
+import './App.css';
 
 function App() {
   return (

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Card } from 'antd';
-import { ColorPalette } from '../shared/types';
-import { ConvertQuestion } from '../shared/rule';
+import { ColorPalette, ConvertQuestion } from '../shared';
 import '../App.css';
 
 interface Props {

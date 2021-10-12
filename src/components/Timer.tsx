@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { SyncOutlined } from '@ant-design/icons';
 import { Typography } from 'antd';
-import { STORAGE_KEY_NAMES } from '../shared/constants';
-import { storagePropsManager } from '../shared/storageManager';
+
+import { STORAGE_KEY_NAMES, storagePropsManager } from '../shared';
 
 const Timer = () => {
   const [timeElapsed, setTimeElapsed] = useState(0);

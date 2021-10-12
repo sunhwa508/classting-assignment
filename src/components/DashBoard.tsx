@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { Button, Typography, Skeleton, Row, Col, Card } from 'antd';
+import { Button, Typography, Skeleton, Row, Col, Card, Modal } from 'antd';
 import axios from 'axios';
+
 import { AnswerBoard } from './AnswerBoard';
 import { QuestionBoard } from './QuestionBoard';
 import { QuizTypes, QuizDataTypes } from '../shared/types';
-import { storagePropsManager } from '../shared/storageManager';
-import { STORAGE_KEY_NAMES } from '../shared/constants';
+import { storagePropsManager, STORAGE_KEY_NAMES } from '../shared';
 import { globalEnv } from '../config/env';
 import { Timer } from './Timer';
 
@@ -59,6 +59,7 @@ const DashBoard = () => {
       history.push(`/result`);
       storagePropsManager.setItemProps(STORAGE_KEY_NAMES.RESULT_DATA, { data, score });
     }
+
     if (hasScore) {
       if (answer === data?.results[currentStage].correct_answer) {
         setScore((prev) => prev + 1);
@@ -68,8 +69,21 @@ const DashBoard = () => {
     } else {
       saveMyAnswer();
     }
+    info();
     setCurrentStage((prev) => prev + 1);
     setIsSelected(false);
+  };
+
+  const info = () => {
+    answer === data?.results[currentStage].correct_answer
+      ? Modal.success({
+          title: '맞았습니다',
+          onOk() {},
+        })
+      : Modal.error({
+          title: '틀렸습니다.',
+          onOk() {},
+        });
   };
 
   return (
