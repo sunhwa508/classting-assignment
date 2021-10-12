@@ -10,9 +10,9 @@
 
 # 📚 구현 사항
 
-`컴포넌트` - DashBoard, AnswerBoard, QuestionBoard, ResultBoard, AppLauout, Header, Home, Timer, WrongAnswer(오답노트)
+`컴포넌트` - DashBoard, AnswerBoard, QuestionBoard, ResultBoard, AppLayout, Header, Home, Timer, WrongAnswer(오답노트)
 
-`shared` - types, rule 공통 함수, 타입
+`shared` - types, rule 공통 함수, contants, storageManager
 
 `config` - globalEnv
 
@@ -50,7 +50,7 @@
 
 #### `yarn test`
 
-jest test 명령어로 _/_.spec.js 파일을 읽어 테스트를 진행합니다.
+jest test 명령어로 spec.js 파일을 읽어 테스트를 진행합니다.
 
 #### `yarn coverage`
 
