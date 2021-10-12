@@ -32,7 +32,7 @@ const Home = () => {
         justifyContent: 'center',
       }}
     >
-      <Title>선생님, 저랑 게임 하나 하시겠습니까?</Title>
+      <Title>선생님, 저랑 퀴즈 한판 하시겠습니까?</Title>
 
       <Button
         disabled={isWait}
