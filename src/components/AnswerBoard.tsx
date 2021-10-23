@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { Card } from 'antd';
 import { ColorPalette, ConvertQuestion } from '../shared';
 import '../App.css';
+import { useEffect } from 'react';
 
 interface Props {
   currentStage: number;
   correct: string;
   incorrect: Array<string>;
-  type?: string;
   handleAnswer: (e: React.MouseEvent<HTMLElement, MouseEvent>) => void;
 }
 
-const AnswerBoard = ({ handleAnswer, correct, incorrect }: Props) => {
+const AnswerBoard = ({ currentStage, handleAnswer, correct, incorrect }: Props) => {
   const [selectedAnswer, setSelectedAnswer] = useState('');
 
   const handleClick = (e: React.MouseEvent<HTMLElement, MouseEvent>) => {
@@ -20,6 +20,10 @@ const AnswerBoard = ({ handleAnswer, correct, incorrect }: Props) => {
     const eventTarget = e.target as HTMLElement;
     setSelectedAnswer(eventTarget.innerText);
   };
+
+  useEffect(() => {
+    setSelectedAnswer('');
+  }, [currentStage]);
 
   return (
     <Card style={{ backgroundColor: 'transparent', border: 'none', height: 400 }}>

@@ -105,7 +105,6 @@ const DashBoard = () => {
               currentStage={currentStage}
               correct={data?.results[currentStage].correct_answer || ''}
               incorrect={data?.results[currentStage].incorrect_answers || []}
-              type={data?.results[currentStage].type}
               handleAnswer={handleAnswer}
             />
             <Row justify="center" align="middle">
