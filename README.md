@@ -1,4 +1,4 @@
-# classting Assignment - [클라스팅]
+# Quiz Game
 
 ## 📽 미리보기
 
